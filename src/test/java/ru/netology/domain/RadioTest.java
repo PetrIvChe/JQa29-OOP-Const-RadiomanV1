@@ -7,12 +7,11 @@ import org.junit.jupiter.params.provider.CsvSource;
 import static org.junit.jupiter.api.Assertions.*;
 
 class RadioTest {
-
+    Radio radio = new Radio();
     // Boundaries for station is -1, 0 , 1, 8, 9, 10
 
     @Test
     public void shouldReturnNextStation1IfCurrentStation0() {
-        Radio radio = new Radio();
         radio.setCurrentStation(0);
         radio.nextStation();
         int expected = 1;
@@ -22,7 +21,6 @@ class RadioTest {
 
     @Test
     public void shouldReturnNextStation2IfCurrentStation1() {
-        Radio radio = new Radio();
         radio.setCurrentStation(1);
         radio.nextStation();
         int expected = 2;
@@ -32,7 +30,6 @@ class RadioTest {
 
     @Test
     public void shouldReturnNextStation9IfCurrentStation8() {
-        Radio radio = new Radio();
         radio.setCurrentStation(8);
         radio.nextStation();
         int expected = 9;
@@ -42,7 +39,6 @@ class RadioTest {
 
     @Test
     public void shouldReturnNextStation0IfCurrentStation9() {
-        Radio radio = new Radio();
         radio.setCurrentStation(9);
         radio.nextStation();
         int expected = 0;
@@ -52,7 +48,6 @@ class RadioTest {
 
     @Test
     public void shouldReturnNextStation0IfCurrentStation10() {
-        Radio radio = new Radio();
         radio.setCurrentStation(10);
         radio.nextStation();
         int expected = 1;
@@ -63,7 +58,6 @@ class RadioTest {
 
     @Test
     public void shouldReturnNextStation1IfCurrentStationMinus1() {
-        Radio radio = new Radio();
         radio.setCurrentStation(-1);
         radio.nextStation();
         int expected = 1;
@@ -86,7 +80,6 @@ class RadioTest {
     )
 
     public void shouldReturnNextStation(String testName, int currentStation, int expected) {
-        Radio radio = new Radio();
         radio.setCurrentStation(currentStation);
         radio.nextStation();
         int actual = radio.getCurrentStation();
@@ -95,7 +88,6 @@ class RadioTest {
 
     @Test
     public void shouldReturnPrevious9IfCurrentStationIs0() {
-        Radio radio = new Radio();
         radio.setCurrentStation(0);
         radio.prevStation();
         int expected = 9;
@@ -105,7 +97,6 @@ class RadioTest {
 
     @Test
     public void shouldReturnPreviousStation0IfCurrentStationIs1() {
-        Radio radio = new Radio();
         radio.setCurrentStation(1);
         radio.prevStation();
         int expected = 0;
@@ -115,7 +106,6 @@ class RadioTest {
 
     @Test
     public void shouldReturnPreviousStation7IfCurrentStationIs8() {
-        Radio radio = new Radio();
         radio.setCurrentStation(8);
         radio.prevStation();
         int expected = 7;
@@ -126,7 +116,6 @@ class RadioTest {
 
     @Test
     public void shouldReturnPreviousStation8IfCurrentStationIs9() {
-        Radio radio = new Radio();
         radio.setCurrentStation(9);
         radio.prevStation();
         int expected = 8;
@@ -136,7 +125,6 @@ class RadioTest {
 
     @Test
     public void shouldReturnPreviousStation1IfCurrentStation9() {
-        Radio radio = new Radio();
         radio.setCurrentStation(10);
         radio.prevStation();
         int expected = 9;
@@ -147,7 +135,6 @@ class RadioTest {
 
     @Test
     public void shouldReturnPreviousStation4IfCurrentStationIs5() {
-        Radio radio = new Radio();
         radio.setCurrentStation(5);
         radio.prevStation();
         int expected = 4;
@@ -158,7 +145,6 @@ class RadioTest {
     //negative test
     @Test
     public void shouldReturnPreviousStation9IfCurrentStationIsMinus1() {
-        Radio radio = new Radio();
         radio.setCurrentStation(-1);
         radio.prevStation();
         int expected = 9;
@@ -181,55 +167,54 @@ class RadioTest {
             }
     )
     public void shouldReturnPrevStation(String testName, int currentStation, int expected) {
-        Radio radio = new Radio();
         radio.setCurrentStation(currentStation);
         radio.prevStation();
         int actual = radio.getCurrentStation();
         assertEquals(expected, actual);
     }
 
-//    @ParameterizedTest
-//    @CsvSource(
-//            value = {
-//                    "Boundaries 0, 0 , 1",
-//                    "Boundaries 1, 1 , 2",
-//                    "Boundaries 9, 9 , 10",
-//                    "Boundaries 10, 10 , 10",
-//                    "Boundaries11, 11,1",
-//                    "Equivalence partitioning 4 , 4, 5",
-//                    "Equivalence partitioning 5 , 5, 6",
-//                    "Negative test -1, -1 , 1",
-//            }
-//    )
-//
-//    public void ShouldReturnIncreaseVolumeIfCurrentVolumeI(String testName, int currentVolume, int expected) {
-//        Radio radio = new Radio();
-//        radio.setCurrentVolume(currentVolume);
-//        radio.increaseVolume();
-//        int actual = radio.getCurrentVolume();
-//        assertEquals(expected, actual);
-//    }
+    @ParameterizedTest
+    @CsvSource(
+            value = {
+                    "Boundaries 0, 0 , 1",
+                    "Boundaries 1, 1 , 2",
+                    "Boundaries 99, 99 , 100",
+                    "Boundaries 100, 100 , 100",
+                    "Boundaries 101, 101,1",
+                    "Equivalence partitioning 49 , 49, 50",
+                    "Equivalence partitioning 50 , 50, 51",
+                    "Negative test -1, -1 , 1",
+                    "Unexpected entry data 500, 500, 1"
+            }
+    )
 
-//    @ParameterizedTest
-//    @CsvSource(
-//            value = {
-//                    "Boundaries 0, 0 , 0",
-//                    "Boundaries 1, 1 , 0",
-//                    "Boundaries 9, 9 , 8",
-//                    "Boundaries 10, 10 , 9",
-//                    "Boundaries11, 11, 0",
-//                    "Equivalence partitioning 4 , 4, 3",
-//                    "Equivalence partitioning 5 , 5, 4",
-//                    "Negative -1, 0, 0"
-//
-//            }
-//    )
-//    public void shouldReturnDecreaseVolumeIfCurrentVolumeI(String testName, int currentVolume, int expected) {
-//        Radio radio = new Radio();
-//        radio.setCurrentVolume(currentVolume);
-//        radio.decreaseVolume();
-//        int actual = radio.getCurrentVolume();
-//        assertEquals(expected, actual);
-//    }
+    public void ShouldReturnIncreaseVolumeIfCurrentVolumeI(String testName, int currentVolume, int expected) {
+        radio.setCurrentVolume(currentVolume);
+        radio.increaseVolume();
+        int actual = radio.getCurrentVolume();
+        assertEquals(expected, actual);
+    }
+
+    @ParameterizedTest
+    @CsvSource(
+            value = {
+                    "Boundaries 0, 0 , 0",
+                    "Boundaries 1, 1 , 0",
+                    "Boundaries 99, 99 , 98",
+                    "Boundaries 100, 100 , 99",
+                    "Boundaries101, 101, 0",
+                    "Equivalence partitioning 49 , 49, 48",
+                    "Equivalence partitioning 50 , 50, 49",
+                    "Negative -1, 0, 0",
+                    "Unexpected 404, 404,0"
+
+            }
+    )
+    public void shouldReturnDecreaseVolumeIfCurrentVolumeI(String testName, int currentVolume, int expected) {
+        radio.setCurrentVolume(currentVolume);
+        radio.decreaseVolume();
+        int actual = radio.getCurrentVolume();
+        assertEquals(expected, actual);
+    }
 
 }
